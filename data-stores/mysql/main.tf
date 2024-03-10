@@ -15,12 +15,12 @@ resource "aws_db_instance" "books" {
   skip_final_snapshot    = true
   publicly_accessible    = true
   engine                 = "mysql"
-  vpc_security_group_ids = [module.vpc.id]
+  vpc_security_group_ids = [module.security_group.id]
   username               = var.db_username
   password               = var.db_password
 }
 
-module "vpc" {
-  source    = "../../networking/vpc"
+module "security_group" {
+  source    = "../../networking/security-group"
   http_port = aws_db_instance.books.port
 }
