@@ -20,7 +20,8 @@ module "mysql_example" {
 }
 
 module "db_security_group_example" {
-  source    = "../../networking/security-group"
-  http_port = 5000
+  source = "../../networking/security-group"
+  name   = "db-security-group"
+  port   = 5000
 }
 
