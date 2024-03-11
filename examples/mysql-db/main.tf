@@ -12,8 +12,15 @@ provider "aws" {
   region = "us-east-2"
 }
 
-module "mysql" {
-  source      = "../../data-stores/mysql"
-  db_username = var.db_username
-  db_password = var.db_password
+module "mysql_example" {
+  source                = "../../data-stores/mysql"
+  db_username           = var.db_username
+  db_password           = var.db_password
+  db_security_group_ids = [module.db_security_group_example.id]
 }
+
+module "db_security_group_example" {
+  source    = "../../networking/security-group"
+  http_port = 5000
+}
+

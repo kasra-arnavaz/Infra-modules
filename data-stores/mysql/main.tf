@@ -8,19 +8,14 @@ terraform {
   }
 }
 
-resource "aws_db_instance" "books" {
-  identifier_prefix      = "books"
+resource "aws_db_instance" "example" {
+  identifier_prefix      = "example"
   allocated_storage      = 10
   instance_class         = "db.t2.micro"
   skip_final_snapshot    = true
   publicly_accessible    = true
   engine                 = "mysql"
-  vpc_security_group_ids = [module.security_group.id]
+  vpc_security_group_ids = var.db_security_group_ids
   username               = var.db_username
   password               = var.db_password
-}
-
-module "security_group" {
-  source    = "../../networking/security-group"
-  http_port = aws_db_instance.books.port
 }
