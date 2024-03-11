@@ -45,7 +45,7 @@ data "aws_vpc" "default" {
 }
 
 module "one_instance_security_group" {
-  source = "../../networking/security-group"
-  name   = "one-instance-security-group"
-  port   = 22
+  source       = "../../networking/security-group/allow-inbound"
+  name         = "one-instance-security-group"
+  inbound_port = 22
 }

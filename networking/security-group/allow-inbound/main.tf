@@ -12,8 +12,8 @@ terraform {
 resource "aws_security_group" "allow_inbound" {
   name = var.name
   ingress {
-    from_port   = var.port
-    to_port     = var.port
+    from_port   = var.inbound_port
+    to_port     = var.inbound_port
     protocol    = "tcp"
     cidr_blocks = var.cidr_blocks
   }
@@ -21,3 +21,4 @@ resource "aws_security_group" "allow_inbound" {
     create_before_destroy = true
   }
 }
+

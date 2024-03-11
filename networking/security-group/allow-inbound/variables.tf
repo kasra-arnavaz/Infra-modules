@@ -7,7 +7,7 @@ variable "name" {
   type        = string
 }
 
-variable "port" {
+variable "inbound_port" {
   description = "The port the server listens on"
   type        = number
 }
