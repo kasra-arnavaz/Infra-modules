@@ -27,7 +27,7 @@ module "asg" {
 }
 
 module "alb" {
-  source     = "../../cluster/alb"
+  source     = "../../networking/alb"
   name       = local.name
   subnet_ids = local.subnet_ids
 }
