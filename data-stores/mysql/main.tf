@@ -9,13 +9,12 @@ terraform {
 }
 
 resource "aws_db_instance" "example" {
-  identifier_prefix      = "example"
-  allocated_storage      = 10
-  instance_class         = "db.t2.micro"
-  skip_final_snapshot    = true
-  publicly_accessible    = true
-  engine                 = "mysql"
-  vpc_security_group_ids = var.db_security_group_ids
-  username               = var.db_username
-  password               = var.db_password
+  identifier_prefix   = "example"
+  allocated_storage   = 10
+  instance_class      = "db.t2.micro"
+  skip_final_snapshot = true
+  publicly_accessible = true
+  engine              = "mysql"
+  username            = var.db_username
+  password            = var.db_password
 }

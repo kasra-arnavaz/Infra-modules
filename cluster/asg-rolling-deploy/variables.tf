@@ -3,7 +3,7 @@
 # You must provide a value for each of these parameters.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "cluster_name" {
+variable "name" {
   description = "The name to use for the cluster resources"
   type        = string
 }
@@ -58,16 +58,10 @@ variable "user_data" {
   default     = null
 }
 
-variable "security_group_ids" {
-  description = "The IDs of the Security Group attached to the EC2 Instances"
-  type        = list(string)
-  default     = []
-}
-
 variable "server_port" {
   description = "The port number the server listens on"
   type        = number
-  default     = 5000
+  default     = 8080
 }
 
 variable "enable_scheduling" {
