@@ -8,7 +8,3 @@ output "alb_http_listner_arn" {
   description = "The ARN of the HTTP listener"
 }
 
-output "alb_security_group_id" {
-  value       = aws_security_group.alb.id
-  description = "The ALB Security Group ID"
-}
