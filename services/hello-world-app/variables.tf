@@ -45,7 +45,7 @@ variable "server_port" {
 variable "server_text" {
   description = "The text to be displayed on the server"
   type        = string
-  default     = "Hey you!"
+  default     = "Hello, World!"
 }
 
 variable "instance_type" {
