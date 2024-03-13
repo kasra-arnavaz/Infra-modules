@@ -63,5 +63,5 @@ resource "aws_lb_listener_rule" "asg" {
 }
 
 locals {
-  name = "docker-app-${var.environment}"
+  name = "hello-world-app-${var.environment}"
 }
