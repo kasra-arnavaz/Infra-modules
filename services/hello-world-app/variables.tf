@@ -3,8 +3,8 @@
 # You must provide a value for each of these parameters.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "environment" {
-  description = "The name of the environment we are deploying to"
+variable "env_name" {
+  description = "The name of the environment, e.g. dev, stage, prod"
   type        = string
 }
 
@@ -46,6 +46,12 @@ variable "server_text" {
   description = "The text to be displayed on the server"
   type        = string
   default     = "Hello, World!"
+}
+
+variable "name" {
+  description = "The name of this hello-world application"
+  type        = string
+  default     = "my-hello-app"
 }
 
 variable "instance_type" {

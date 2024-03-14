@@ -2,9 +2,8 @@
 # REQUIRED PARAMETERS
 # You must provide a value for each of these parameters.
 # ---------------------------------------------------------------------------------------------------------------------
-
-variable "name" {
-  description = "The name to use for the cluster resources"
+variable "env_name" {
+  description = "The name of the environment, e.g. dev, stage, prod"
   type        = string
 }
 
@@ -45,12 +44,16 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
-
-
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
+
+variable "name" {
+  description = "The name to use for the cluster resources"
+  type        = string
+  default     = "my-cluster"
+}
 
 variable "user_data" {
   description = "The user data script to run in each Instance at boot"

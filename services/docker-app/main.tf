@@ -10,7 +10,7 @@ terraform {
 
 module "asg" {
   source        = "../../cluster/asg-rolling-deploy"
-  name          = local.name
+  env_name      = var.env_name
   ami           = "ami-07ee19d0df88d3988" # preinstalled with docker
   instance_type = var.instance_type
   user_data = templatefile("${path.module}/user-data.sh", {
@@ -28,8 +28,8 @@ module "asg" {
 
 module "alb" {
   source     = "../../networking/alb"
-  name       = local.name
   subnet_ids = local.subnet_ids
+  env_name   = var.env_name
 }
 
 resource "aws_lb_target_group" "asg" {
@@ -63,5 +63,5 @@ resource "aws_lb_listener_rule" "asg" {
 }
 
 locals {
-  name = "docker-app-${var.environment}"
+  name = "${var.name}-${var.env_name}"
 }

@@ -8,7 +8,7 @@ terraform {
   }
 }
 resource "aws_lb" "example" {
-  name               = var.name
+  name               = local.name
   load_balancer_type = "application"
   subnets            = var.subnet_ids
   security_groups    = [aws_security_group.alb.id]
@@ -29,7 +29,7 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_security_group" "alb" {
-  name = "${var.name}-alb-sg"
+  name = "${local.name}-sg"
   lifecycle {
     create_before_destroy = true
   }
@@ -59,5 +59,6 @@ locals {
   any_protocol = "-1"
   tcp_protocol = "tcp"
   all_ips      = ["0.0.0.0/0"]
+  name         = "${var.name}-${var.env_name}"
 }
 

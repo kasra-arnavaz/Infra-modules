@@ -20,7 +20,7 @@ resource "aws_launch_configuration" "example" {
 }
 
 resource "aws_autoscaling_group" "example" {
-  name                 = var.name
+  name                 = local.name
   launch_configuration = aws_launch_configuration.example.name
   vpc_zone_identifier  = var.subnet_ids
   target_group_arns    = var.target_group_arns
@@ -35,13 +35,13 @@ resource "aws_autoscaling_group" "example" {
   }
   tag {
     key                 = "Name"
-    value               = "${var.name}-asg"
+    value               = "${local.name}-asg"
     propagate_at_launch = true
   }
 }
 
 resource "aws_security_group" "instance" {
-  name = "${var.name}-instance-sg"
+  name = "${local.name}-sg"
   lifecycle {
     create_before_destroy = true
   }
@@ -70,6 +70,7 @@ locals {
   any_protocol = "-1"
   tcp_protocol = "tcp"
   all_ips      = ["0.0.0.0/0"]
+  name         = "${var.name}-${var.env_name}"
 }
 
 resource "aws_autoscaling_schedule" "during_business_hours" {

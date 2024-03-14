@@ -3,8 +3,8 @@
 # You must provide a value for each of these parameters.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "environment" {
-  description = "The name of the environment we are deploying to"
+variable "env_name" {
+  description = "The name of the environment, e.g. dev, stage, prod"
   type        = string
 }
 
@@ -25,15 +25,6 @@ variable "max_size" {
     error_message = "ASGs must have 10 or fewer instances to keep the costs down."
   }
 }
-
-# variable "docker_config" {
-#   description = "The config for the docker image used in user-data"
-#   type = object({
-#     container_name = string
-#     tag_name       = string
-#     server_port    = number
-#   })
-# }
 
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
@@ -56,6 +47,12 @@ variable "server_port" {
   description = "The port the server will use for HTTP requests"
   type        = number
   default     = 8080
+}
+
+variable "name" {
+  description = "The name of this docker application"
+  type        = string
+  default     = "my-docker-app"
 }
 
 variable "instance_type" {
@@ -84,4 +81,13 @@ variable "subnet_ids" {
   description = "The IDs of the subnets to deploy into"
   type        = list(string)
   default     = null
+}
+
+variable "db_config" {
+  description = "The address and port of the database"
+  type = object({
+    address = string
+    port    = number
+  })
+  default = null
 }
