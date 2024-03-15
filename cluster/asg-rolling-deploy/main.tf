@@ -74,23 +74,27 @@ locals {
 }
 
 resource "aws_autoscaling_schedule" "during_business_hours" {
-  count                 = var.enable_scheduling ? 1 : 0
-  scheduled_action_name = "increase"
-  min_size              = var.min_size
-  max_size              = var.max_size
-  desired_capacity      = var.max_size
-  recurrence            = "0 9 * * *"
-  # time_zone              = "CET"
+  count                  = var.enable_scheduling ? 1 : 0
+  scheduled_action_name  = "increase"
+  min_size               = var.min_size
+  max_size               = var.max_size
+  desired_capacity       = var.max_size
+  recurrence             = "0 9 * * *"
+  time_zone              = local.time_zone
   autoscaling_group_name = aws_autoscaling_group.example.name
 }
 
 resource "aws_autoscaling_schedule" "outside_business_hours" {
-  count                 = var.enable_scheduling ? 1 : 0
-  scheduled_action_name = "decrease"
-  min_size              = var.min_size
-  max_size              = var.max_size
-  desired_capacity      = var.min_size
-  recurrence            = "0 17 * * *"
-  # time_zone              = "CET"
+  count                  = var.enable_scheduling ? 1 : 0
+  scheduled_action_name  = "decrease"
+  min_size               = var.min_size
+  max_size               = var.max_size
+  desired_capacity       = var.min_size
+  recurrence             = "0 17 * * *"
+  time_zone              = local.time_zone
   autoscaling_group_name = aws_autoscaling_group.example.name
+}
+
+locals {
+  time_zone = "Europe/Copenhagen"
 }
