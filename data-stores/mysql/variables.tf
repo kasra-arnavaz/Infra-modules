@@ -30,3 +30,9 @@ variable "name" {
   type        = string
   default     = "my-db"
 }
+
+variable "table" {
+  description = "The name of the table to create in the database"
+  type        = string
+  default     = "my-table"
+}

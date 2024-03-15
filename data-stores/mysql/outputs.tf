@@ -8,7 +8,25 @@ output "port" {
   description = "The port the database is listening on"
 }
 
-output "arn" {
-  value       = aws_db_instance.example.arn
-  description = "The ARN of the database"
+output "name" {
+  value       = aws_db_instance.example.db_name
+  description = "The name of the database"
 }
+
+output "table" {
+  value       = var.table
+  description = "The name of the table in the database"
+}
+
+output "username" {
+  value       = var.db_username
+  description = "The username of the database"
+  sensitive   = true
+}
+
+output "password" {
+  value       = var.db_password
+  description = "The password of the database"
+  sensitive   = true
+}
+
