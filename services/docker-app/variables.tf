@@ -84,10 +84,14 @@ variable "subnet_ids" {
 }
 
 variable "db_config" {
-  description = "The address and port of the database"
+  description = "The address,port, and name of the database"
   type = object({
-    address = string
-    port    = number
+    address  = string
+    port     = number
+    name     = string
+    table    = string
+    username = string
+    password = string
   })
   default = null
 }

@@ -11,18 +11,18 @@ data "aws_subnets" "default" {
   }
 }
 
-# data "terraform_remote_state" "db" {
-#   count   = var.db_config == null ? 1 : 0
-#   backend = "s3"
-#   config = {
-#     bucket = var.db_remote_state_bucket
-#     key    = var.db_remote_state_key
-#     region = "us-east-2"
-#   }
-# }
+data "terraform_remote_state" "db" {
+  count   = var.db_config == null ? 1 : 0
+  backend = "s3"
+  config = {
+    bucket = var.db_remote_state_bucket
+    key    = var.db_remote_state_key
+    region = "us-east-2"
+  }
+}
 
 locals {
   vpc_id     = (var.vpc_id == null ? data.aws_vpc.default[0].id : var.vpc_id)
   subnet_ids = (var.subnet_ids == null ? data.aws_subnets.default[0].ids : var.subnet_ids)
-  # db_config  = (var.db_config == null ? data.terraform_remote_state.db[0].outputs : var.db_config)
+  db_config  = (var.db_config == null ? data.terraform_remote_state.db[0].outputs : var.db_config)
 }

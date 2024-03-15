@@ -16,6 +16,11 @@ module "asg" {
   user_data = templatefile("${path.module}/user-data.sh", {
     server_port = var.server_port
     tag_name    = "kasraz/flask-app"
+    db_address  = local.db_config.address
+    db_name     = local.db_config.name
+    db_table    = local.db_config.table
+    db_username = local.db_config.username
+    db_password = local.db_config.password
   })
   min_size          = var.min_size
   max_size          = var.max_size
