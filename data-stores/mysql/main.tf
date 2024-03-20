@@ -9,16 +9,20 @@ terraform {
 }
 
 resource "aws_db_instance" "example" {
-  identifier_prefix      = local.name
-  allocated_storage      = 10
-  instance_class         = "db.t2.micro"
-  skip_final_snapshot    = true
-  engine                 = "mysql"
-  publicly_accessible    = true
-  vpc_security_group_ids = [aws_security_group.mysql.id]
-  db_name                = var.name
-  username               = var.db_username
-  password               = var.db_password
+  identifier_prefix       = local.name
+  allocated_storage       = 10
+  instance_class          = "db.t2.micro"
+  skip_final_snapshot     = true
+  publicly_accessible     = true
+  vpc_security_group_ids  = [aws_security_group.mysql.id]
+  backup_retention_period = var.backup_retention_period
+  # If specified, this DB will be a replica
+  replicate_source_db = var.replicate_source_db
+  # Only set these for the primary DB
+  engine   = var.replicate_source_db == null ? "mysql" : null
+  db_name  = var.replicate_source_db == null ? var.name : null
+  username = var.replicate_source_db == null ? var.db_username : null
+  password = var.replicate_source_db == null ? var.db_password : null
 }
 
 resource "aws_security_group" "mysql" {

@@ -8,18 +8,6 @@ variable "env_name" {
   type        = string
 }
 
-variable "db_username" {
-  description = "Username of the database"
-  type        = string
-  sensitive   = true
-}
-
-variable "db_password" {
-  description = "Password of the database"
-  type        = string
-  sensitive   = true
-}
-
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
@@ -35,4 +23,30 @@ variable "table" {
   description = "The name of the table to create in the database"
   type        = string
   default     = "my-table"
+}
+
+variable "backup_retention_period" {
+  description = "Days to retain backups. Must be > 0 to enable replication."
+  type        = number
+  default     = null
+}
+
+variable "replicate_source_db" {
+  description = "If specified, replicate the RDS database at the given ARN."
+  type        = string
+  default     = null
+}
+
+variable "db_username" {
+  description = "Username of the database"
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
+variable "db_password" {
+  description = "Password of the database"
+  type        = string
+  sensitive   = true
+  default     = null
 }

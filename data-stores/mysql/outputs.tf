@@ -18,6 +18,11 @@ output "table" {
   description = "The name of the table in the database"
 }
 
+output "arn" {
+  value       = aws_db_instance.example.arn
+  description = "The ARN of the RDS Instance"
+}
+
 output "username" {
   value       = var.db_username
   description = "The username of the database"
