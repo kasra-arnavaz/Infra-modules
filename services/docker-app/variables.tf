@@ -31,6 +31,24 @@ variable "max_size" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
+variable "name" {
+  description = "The name of this docker application"
+  type        = string
+  default     = "my-docker-app"
+}
+
+variable "cluster_name" {
+  description = "The name to use for the cluster resources"
+  type        = string
+  default     = "my-cluster"
+}
+
+variable "alb_name" {
+  description = "The name to use for the Application Load Balancer"
+  type        = string
+  default     = "my-alb"
+}
+
 variable "db_remote_state_bucket" {
   description = "The name of the S3 bucket for the database's remote state"
   type        = string
@@ -47,12 +65,6 @@ variable "server_port" {
   description = "The port the server will use for HTTP requests"
   type        = number
   default     = 8080
-}
-
-variable "name" {
-  description = "The name of this docker application"
-  type        = string
-  default     = "my-docker-app"
 }
 
 variable "instance_type" {

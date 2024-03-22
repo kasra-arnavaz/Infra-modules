@@ -10,6 +10,7 @@ terraform {
 
 module "asg" {
   source        = "../../cluster/asg-rolling-deploy"
+  name          = var.cluster_name
   env_name      = var.env_name
   ami           = "ami-07ee19d0df88d3988" # preinstalled with docker
   instance_type = var.instance_type
@@ -33,8 +34,9 @@ module "asg" {
 
 module "alb" {
   source     = "../../networking/alb"
-  subnet_ids = local.subnet_ids
+  name       = var.alb_name
   env_name   = var.env_name
+  subnet_ids = local.subnet_ids
 }
 
 resource "aws_lb_target_group" "asg" {

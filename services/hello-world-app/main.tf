@@ -10,8 +10,9 @@ terraform {
 
 module "asg" {
   source        = "../../cluster/asg-rolling-deploy"
-  ami           = var.ami
+  name          = var.cluster_name
   env_name      = var.env_name
+  ami           = var.ami
   instance_type = var.instance_type
   user_data = templatefile("${path.module}/user_data.sh", {
     server_port = var.server_port
@@ -28,8 +29,9 @@ module "asg" {
 
 module "alb" {
   source     = "../../networking/alb"
-  subnet_ids = local.subnet_ids
+  name       = var.alb_name
   env_name   = var.env_name
+  subnet_ids = local.subnet_ids
 }
 
 resource "aws_lb_target_group" "asg" {

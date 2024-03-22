@@ -36,6 +36,23 @@ variable "ami" {
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
 
+variable "name" {
+  description = "The name of this hello-world application"
+  type        = string
+  default     = "my-hello-app"
+}
+
+variable "cluster_name" {
+  description = "The name to use for the cluster resources"
+  type        = string
+  default     = "my-cluster"
+}
+
+variable "alb_name" {
+  description = "The name to use for the Application Load Balancer"
+  type        = string
+  default     = "my-alb"
+}
 variable "server_port" {
   description = "The port the server will use for HTTP requests"
   type        = number
@@ -46,12 +63,6 @@ variable "server_text" {
   description = "The text to be displayed on the server"
   type        = string
   default     = "Hello, World!"
-}
-
-variable "name" {
-  description = "The name of this hello-world application"
-  type        = string
-  default     = "my-hello-app"
 }
 
 variable "instance_type" {
