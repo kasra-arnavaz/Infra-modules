@@ -11,7 +11,7 @@ terraform {
 resource "aws_db_instance" "example" {
   identifier_prefix       = local.name
   allocated_storage       = 10
-  instance_class          = "db.t2.micro"
+  instance_class          = "db.t3.micro"
   skip_final_snapshot     = true
   publicly_accessible     = true
   vpc_security_group_ids  = [aws_security_group.mysql.id]
