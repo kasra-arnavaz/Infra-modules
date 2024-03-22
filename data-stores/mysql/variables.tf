@@ -19,6 +19,12 @@ variable "name" {
   default     = "my-db"
 }
 
+variable "db_name" {
+  description = "The name of the database to create"
+  type        = string
+  default     = null
+}
+
 variable "table" {
   description = "The name of the table to create in the database"
   type        = string

@@ -20,19 +20,19 @@ resource "aws_db_instance" "example" {
   replicate_source_db = var.replicate_source_db
   # Only set these for the primary DB
   engine   = var.replicate_source_db == null ? "mysql" : null
-  db_name  = var.replicate_source_db == null ? var.name : null
+  db_name  = var.replicate_source_db == null ? var.db_name : null
   username = var.replicate_source_db == null ? var.db_username : null
   password = var.replicate_source_db == null ? var.db_password : null
   # Run a script locally to create a table
   provisioner "local-exec" {
-    command = templatefile("${path.module}/local-exec.sh", {
+    command = var.replicate_source_db == null ? templatefile("${path.module}/local-exec.sh", {
       db_name  = self.db_name
       sql_file = "${path.module}/table.sql"
       address  = self.address
       port     = self.port
       username = var.db_username
       password = var.db_password
-    })
+    }) : ":"
   }
 }
 
