@@ -30,9 +30,6 @@ resource "aws_lb_listener" "http" {
 
 resource "aws_security_group" "alb" {
   name = "${local.name}-sg"
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_security_group_rule" "allow_http_inbound" {

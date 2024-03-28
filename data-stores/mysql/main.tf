@@ -39,9 +39,6 @@ resource "aws_db_instance" "example" {
 resource "aws_security_group" "mysql" {
   name   = "${local.name}-sg"
   vpc_id = data.aws_vpc.default.id
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_security_group_rule" "allow_sql_inbound" {
