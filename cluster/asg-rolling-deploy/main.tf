@@ -42,6 +42,9 @@ resource "aws_autoscaling_group" "example" {
 
 resource "aws_security_group" "instance" {
   name = "${local.name}-sg"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group_rule" "allow_http_inbound" {
